@@ -1,0 +1,157 @@
+from tkinter import *
+from math  import *
+cal=Tk()
+cal.geometry("660x500")
+cal.title("Calculator")
+operator=''
+def btnclick(numbers):
+    global operator
+    operator+=str(numbers)
+    operator=operator.replace('**-1','^(-1)')
+    operator=operator.replace('**','^')
+    operator=operator.replace('*100/','%')
+    ti.set(operator)
+
+def cancel():
+    global operator
+    a=len(operator)
+    operator=operator[:-1]
+    ti.set(operator)
+
+def btncleardisplay():
+    global operator
+    operator=''
+    ti.set("")
+
+def btnequal():
+    global operator
+    operator=operator.replace('^(-1)','**-1')
+    operator=operator.replace('ln(','log(')
+    operator=operator.replace('^','**')
+    operator=operator.replace('%','*100/')
+    sum=str(eval(operator))
+    ti.set(sum)
+    operator=sum
+
+def pifu():
+    global operator
+    operator=pi
+    ti.set(operator)
+    operator=str(operator)
+
+def facto():
+    global operator
+    fac=str(factorial(int(operator[len(operator)-1])))
+    operator=operator.replace(operator[len(operator)-1],fac)
+    ti.set(operator)
+
+def sign():
+    global operator
+    operator=float(operator)
+    if(operator!=0):
+        operator=-operator
+    operator=str(operator)
+    ti.set(operator)
+
+ti=StringVar()
+td=Entry(cal,font=("arial",25,"bold"),textvariable=ti,width=30,bd=10,bg="skyblue",justify="right")
+td.place(x=50,y=40)
+
+btn7=Button(cal,padx=7,pady=1,bd=8,fg="black",font=("arial",20,"bold"),text="7",command=lambda:btnclick(7))
+btn7.place(x=135,y=190)
+
+btn8=Button(cal,padx=7,pady=1,bd=8,fg="black",font=("arial",20,"bold"),text="8",command=lambda:btnclick(8))
+btn8.place(x=210,y=190)
+
+btn9=Button(cal,padx=7,pady=1,bd=8,fg="black",font=("arial",20,"bold"),text="9",command=lambda:btnclick(9))
+btn9.place(x=285,y=190)
+
+btn4=Button(cal,padx=7,pady=1,bd=8,fg="black",font=("arial",20,"bold"),text="4",command=lambda:btnclick(4))
+btn4.place(x=135,y=265)
+
+btn5=Button(cal,padx=7,pady=1,bd=8,fg="black",font=("arial",20,"bold"),text="5",command=lambda:btnclick(5))
+btn5.place(x=210,y=265)
+
+btn6=Button(cal,padx=7,pady=1,bd=8,fg="black",font=("arial",20,"bold"),text="6",command=lambda:btnclick(6))
+btn6.place(x=285,y=265)
+
+btn1=Button(cal,padx=7,pady=1,bd=8,fg="black",font=("arial",20,"bold"),text="1",command=lambda:btnclick(1))
+btn1.place(x=135,y=340)
+
+btn2=Button(cal,padx=7,pady=1,bd=8,fg="black",font=("arial",20,"bold"),text="2",command=lambda:btnclick(2))
+btn2.place(x=210,y=340)
+
+btn3=Button(cal,padx=7,pady=1,bd=8,fg="black",font=("arial",20,"bold"),text="3",command=lambda:btnclick(3))
+btn3.place(x=285,y=340)
+
+btn0=Button(cal,padx=45,pady=1,bd=8,fg="black",font=("arial",20,"bold"),text="0",command=lambda:btnclick(0))
+btn0.place(x=135,y=415)
+
+add=Button(cal,padx=7,pady=1,bd=8,fg="black",font=("arial",20,"bold"),text="+",command=lambda:btnclick('+'))
+add.place(x=210,y=115)
+
+sub=Button(cal,padx=11,pady=1,bd=8,fg="black",font=("arial",20,"bold"),text="-",command=lambda:btnclick('-'))
+sub.place(x=285,y=115)
+
+mul=Button(cal,padx=10,pady=1,bd=8,fg="black",font=("arial",20,"bold"),text="*",command=lambda:btnclick('*'))
+mul.place(x=360,y=190)
+
+div=Button(cal,padx=12,pady=1,bd=8,fg="black",font=("arial",20,"bold"),text="/",command=lambda:btnclick('/'))
+div.place(x=360,y=265)
+
+dec=Button(cal,padx=11,pady=1,bd=8,fg="black",font=("arial",20,"bold"),text=".",command=lambda:btnclick('.'))
+dec.place(x=285,y=415)
+
+pib=Button(cal,padx=5,pady=1,bd=8,fg="black",font=("arial",20,"bold"),text="Pi",command=lambda:btnclick('pi'))
+pib.place(x=540,y=115)
+
+sqb=Button(cal,padx=4,pady=1,bd=8,fg="black",font=("arial",20,"bold"),text="Sqrt",command=lambda:btnclick('sqrt('))
+sqb.place(x=435,y=115)
+
+lnb=Button(cal,padx=7,pady=1,bd=8,fg="black",font=("arial",20,"bold"),text="ln",command=lambda:btnclick('ln('))
+lnb.place(x=50,y=190)
+
+facb=Button(cal,padx=8,pady=1,bd=8,fg="black",font=("arial",20,"bold"),text="x!",command=facto)
+facb.place(x=50,y=340)
+
+expb=Button(cal,padx=4,pady=1,bd=8,fg="black",font=("arial",20,"bold"),text="e^",command=lambda:btnclick('exp('))
+expb.place(x=50,y=415)
+
+reb=Button(cal,padx=1,pady=1,bd=8,fg="black",font=("arial",20,"bold"),text="1/x",command=lambda:btnclick('**-1'))
+reb.place(x=50,y=265)
+
+cosb=Button(cal,padx=6,pady=1,bd=8,fg="black",font=("arial",20,"bold"),text="Cos",command=lambda:btnclick('cos('))
+cosb.place(x=435,y=265)
+
+pob=Button(cal,padx=3,pady=1,bd=8,fg="black",font=("arial",20,"bold"),text="x^",command=lambda:btnclick('**'))
+pob.place(x=540,y=190)
+
+sib=Button(cal,padx=2,pady=1,bd=8,fg="black",font=("arial",20,"bold"),text="+/-",command=sign)
+sib.place(x=540,y=265)
+
+perb=Button(cal,padx=6.5,pady=1,bd=8,fg="black",font=("arial",20,"bold"),text="%",command=lambda:btnclick('*100/'))
+perb.place(x=540,y=340)
+
+sinb=Button(cal,padx=10,pady=1,bd=8,fg="black",font=("arial",20,"bold"),text="Sin",command=lambda:btnclick('sin('))
+sinb.place(x=435,y=190)
+
+tanb=Button(cal,padx=7,pady=1,bd=8,fg="black",font=("arial",20,"bold"),text="Tan",command=lambda:btnclick('tan('))
+tanb.place(x=435,y=340)
+
+brac1=Button(cal,padx=22,pady=1,bd=8,fg="black",font=("arial",20,"bold"),text="(",command=lambda:btnclick('('))
+brac1.place(x=435,y=415)
+
+brac2=Button(cal,padx=20,pady=1,bd=8,fg="black",font=("arial",20,"bold"),text=")",command=lambda:btnclick(')'))
+brac2.place(x=529,y=415)
+
+btnequal=Button(cal,padx=8,pady=38,bd=8,fg="black",bg="light green",font=("arial",20,"bold"),text="=",command=btnequal)
+btnequal.place(x=360,y=340)
+
+btnclear=Button(cal,padx=38,pady=1,bd=8,fg="black",bg="crimson",font=("arial",20,"bold"),text="CE",command=btncleardisplay)
+btnclear.place(x=50,y=115)
+
+btncancel=Button(cal,padx=5.5,pady=1,bd=8,fg="black",font=("arial",20,"bold"),text="C",command=cancel)
+btncancel.place(x=360,y=115)
+
+cal.configure(background="black")
+cal.mainloop()                             
